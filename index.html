@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RRwithmath.lk</title>
+    <title>RRwithmath.lk | නිල වෙබ් අඩවිය</title>
     
     <link rel="icon" type="image/png" href="Logo02.png">
     
@@ -21,6 +21,9 @@
         .nav-links { display: flex; gap: 25px; }
         .nav-links a { color: white; text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary-blue); }
+
+        /* Mobile Menu Toggle Button */
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: white; }
 
         /* 1. Perfect Responsive Banner (No Squeeze) */
         .banner { 
@@ -82,11 +85,30 @@
         /* Floating WhatsApp */
         .floating-wa { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; }
 
+        /* Mobile Responsive */
         @media (max-width: 768px) {
+            nav { padding: 15px 5%; }
+            .menu-toggle { display: block; } /* ෆෝන් එකේදී ඉරි තුන පෙන්වයි */
+            
+            .nav-links {
+                display: none; /* මුලින් මෙනු එක වසා ඇත */
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #111;
+                padding: 20px 0;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .nav-links.active { display: flex; } /* ඉරි තුන ක්ලික් කළ විට පෙන්වයි */
+
             .banner { aspect-ratio: 16 / 6; }
-            .about-section { flex-direction: column; text-align: center; }
-            .nav-links { display: none; }
+            .about-section { flex-direction: column; text-align: center; padding: 40px 5%; }
             .main-img { width: 100%; max-width: 300px; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -94,12 +116,15 @@
 
     <nav>
         <div class="logo">RRwithmath</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#about">About</a>
-            <a href="#timetable">Timetable</a>
-            <a href="#lessons">Lessons</a>
-            <a href="#shorts">Shorts</a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#" onclick="toggleMenu()">Home</a>
+            <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#timetable" onclick="toggleMenu()">Timetable</a>
+            <a href="#lessons" onclick="toggleMenu()">Lessons</a>
+            <a href="#shorts" onclick="toggleMenu()">Shorts</a>
         </div>
     </nav>
 
@@ -111,7 +136,7 @@
             <span class="badge">MEET YOUR TEACHER</span>
             <h2 style="font-size: 2.2rem; margin: 10px 0;">About</h2>
             <p style="line-height: 1.7; color: #555;">6 ශ්‍රේණියේ සිට 11 ශ්‍රේණිය දක්වා ඕනෑම මට්ටමක සිටින දරුවෙකුට ගණිතය යනු තවදුරටත් අමාරු විෂයක් නොවේ! RRwithmath.lk හරහා දරුවන්ගේ ගණිත දැනුම අලුත් මානයකට රැගෙන යන්නෙමු.</p>
-            <a href="https://www.youtube.com/@RRwithmath" target="_blank" class="yt-btn">
+            <a href="https://www.youtube.com/channel/UCizU4mMrHqzCshwHSdwkU2A" target="_blank" class="yt-btn">
                 <i class="fab fa-youtube"></i> SUBSCRIBE ON YOUTUBE
             </a>
         </div>
@@ -183,6 +208,12 @@
     </a>
 
     <script>
+        // මෙනු එක Toggle කිරීම සඳහා වන function එක
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
         const API_KEY = 'AIzaSyD7TvC7d6jLG5KjEKtbYTh3bleqP4iR7WY'; 
         const CHANNEL_ID = 'UCizU4mMrHqzCshwHSdwkU2A'; 
 
