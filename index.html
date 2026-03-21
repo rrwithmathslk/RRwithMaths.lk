@@ -55,6 +55,30 @@
         }
         .yt-btn:hover { transform: scale(1.05); }
 
+        /* --- STUDENT LOGIN BUTTON STYLE --- */
+        .portal-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, #2563eb, #3b82f6);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            margin-left: 10px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        .portal-btn:hover { transform: scale(1.05); background: linear-gradient(45deg, #1e40af, #2563eb); }
+        .portal-btn i { margin-right: 8px; }
+
+        @media (max-width: 768px) {
+            .portal-btn { margin-left: 0; width: 100%; justify-content: center; box-sizing: border-box; }
+        }
+        /* ---------------------------------- */
+
         /* 3. Impact Section */
         .impact-section { padding: 80px 10%; text-align: center; background: #f8fafc; }
         .section-title { font-size: 2.5rem; font-weight: 800; margin: 15px 0; }
@@ -88,10 +112,10 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             nav { padding: 15px 5%; }
-            .menu-toggle { display: block; } /* ෆෝන් එකේදී ඉරි තුන පෙන්වයි */
+            .menu-toggle { display: block; } 
             
             .nav-links {
-                display: none; /* මුලින් මෙනු එක වසා ඇත */
+                display: none; 
                 flex-direction: column;
                 position: absolute;
                 top: 60px;
@@ -103,7 +127,7 @@
                 gap: 20px;
             }
 
-            .nav-links.active { display: flex; } /* ඉරි තුන ක්ලික් කළ විට පෙන්වයි */
+            .nav-links.active { display: flex; } 
 
             .banner { aspect-ratio: 16 / 6; }
             .about-section { flex-direction: column; text-align: center; padding: 40px 5%; }
@@ -136,10 +160,15 @@
             <span class="badge">MEET YOUR TEACHER</span>
             <h2 style="font-size: 2.2rem; margin: 10px 0;">About</h2>
             <p style="line-height: 1.7; color: #555;">6 ශ්‍රේණියේ සිට 11 ශ්‍රේණිය දක්වා ඕනෑම මට්ටමක සිටින දරුවෙකුට ගණිතය යනු තවදුරටත් අමාරු විෂයක් නොවේ! RRwithmath.lk හරහා දරුවන්ගේ ගණිත දැනුම අලුත් මානයකට රැගෙන යන්නෙමු.</p>
+            
             <a href="https://www.youtube.com/channel/UCizU4mMrHqzCshwHSdwkU2A" target="_blank" class="yt-btn">
                 <i class="fab fa-youtube"></i> SUBSCRIBE ON YOUTUBE
             </a>
-        </div>
+
+            <a href="login.html" class="portal-btn">
+                <i class="fas fa-user-graduate"></i> STUDENT LOGIN
+            </a>
+            </div>
     </section>
 
     <section class="impact-section">
@@ -208,7 +237,6 @@
     </a>
 
     <script>
-        // මෙනු එක Toggle කිරීම සඳහා වන function එක
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
