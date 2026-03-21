@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal | RRwithMaths</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.95);
+            --success: #22c55e;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: radial-gradient(circle at top right, #1e3a8a, #0f172a);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .circle {
+            position: absolute; border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            filter: blur(80px); z-index: -1;
+            animation: float 10s infinite alternate;
+        }
+        .c1 { width: 300px; height: 300px; top: -100px; left: -100px; }
+        .c2 { width: 250px; height: 250px; bottom: -50px; right: -50px; animation-delay: 2s; }
+        @keyframes float { from { transform: translate(0, 0); } to { transform: translate(50px, 50px); } }
+
+        .auth-wrapper { 
+            max-width: 480px; 
+            margin: 40px auto; 
+            padding: 15px;
+            animation: fadeIn 0.8s ease-out; 
+            box-sizing: border-box; 
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .auth-card {
+            background: var(--glass); padding: 30px; border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+            text-align: center; border: 1px solid rgba(255,255,255,0.2);
+            width: 100%; box-sizing: border-box;
+        }
+
+        .logo-area {
+            font-size: 2.2rem; font-weight: 800; margin-bottom: 5px;
+            background: linear-gradient(to right, #2563eb, #60a5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .input-group { text-align: left; margin-bottom: 15px; width: 100%; }
+        .input-group label { display: block; font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 5px; }
+        .input-group input, .input-group select {
+            width: 100%; padding: 12px; border: 2px solid #e2e8f0;
+            border-radius: 12px; font-family: inherit; transition: 0.3s; background: #fff; box-sizing: border-box;
+        }
+
+        .input-row { display: flex; gap: 15px; width: 100%; }
+        .input-row .input-group { flex: 1; }
+
+        @media (max-width: 500px) {
+            .input-row { flex-direction: column; gap: 0px; }
+            .auth-card { padding: 25px 20px; }
+            .auth-wrapper { margin: 20px auto; }
+        }
+
+        .btn {
+            width: 100%; padding: 15px; background: linear-gradient(45deg, #2563eb, #3b82f6);
+            color: white; border: none; border-radius: 12px; font-weight: 700;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            box-sizing: border-box;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4); }
+
+        #dashboardView { display: none; background: #f1f5f9; min-height: 100vh; width: 100%; }
+        .dash-nav {
+            background: white; padding: 15px 30px; display: flex;
+            justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;
+        }
+        .user-profile { display: flex; align-items: center; gap: 15px; }
+        .user-profile img { width: 55px; height: 55px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; }
+        
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+
+        .card { background: white; padding: 25px; border-radius: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
+        .card-title { display: flex; align-items: center; gap: 10px; font-weight: 700; margin-bottom: 20px; color: var(--dark); }
+        .card-title i { color: var(--primary); }
+
+        .hour-circle {
+            width: 110px; height: 110px; border-radius: 50%; border: 8px solid #e2e8f0;
+            border-top-color: var(--primary); display: flex; align-items: center;
+            justify-content: center; margin: 0 auto 15px; font-size: 1.6rem; font-weight: 800; color: var(--primary);
+        }
+
+        .notice-item { background: #fff9db; padding: 15px; border-radius: 15px; border-left: 5px solid #fab005; margin-bottom: 10px; font-size: 0.9rem; }
+        .msg-box { height: 150px; overflow-y: auto; background: #f8fafc; padding: 10px; border-radius: 15px; margin-bottom: 10px; border: 1px solid #eee; }
+        .sent-msg { background: var(--primary); color: white; padding: 8px 15px; border-radius: 15px 15px 0 15px; margin-bottom: 8px; width: fit-content; margin-left: auto; font-size: 0.85rem; }
+
+    </style>
+</head>
+<body>
+
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+
+    <div id="authSection" class="auth-wrapper">
+        <div id="regFormCard" class="auth-card">
+            <div class="logo-area">RRwithMaths</div>
+            <h3 style="margin-top:0; color:#334155;">අලුත් ගිණුමක් සාදන්න</h3>
+            
+            <div id="idDisplay" style="display:none; background:#1e293b; color:white; padding:25px; border-radius:20px; margin-bottom:20px; border-left: 5px solid var(--success);">
+                <p style="font-size:0.8rem; color:#94a3b8; margin:0;">ඔබේ ස්ථිර Student ID එක</p>
+                <h2 id="generatedID" style="color:var(--success); margin:10px 0; letter-spacing: 2px;"></h2>
+                <button onclick="showLogin()" class="btn" style="background:var(--success); font-size:0.9rem;">දැන් Login වන්න</button>
+            </div>
+
+            <form id="actualRegForm" onsubmit="processRegister(event)">
+                <div class="input-row">
+                    <div class="input-group"><label>First Name</label><input type="text" id="fname" required></div>
+                    <div class="input-group"><label>Last Name</label><input type="text" id="lname" required></div>
+                </div>
+                
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Grade</label>
+                        <select id="grade" required>
+                            <option value="">තෝරන්න</option>
+                            <option value="Grade 6">Grade 6</option>
+                            <option value="Grade 7">Grade 7</option>
+                            <option value="Grade 8">Grade 8</option>
+                            <option value="Grade 9">Grade 9</option>
+                            <option value="Grade 10">Grade 10</option>
+                            <option value="Grade 11 (O/L)">Grade 11 (O/L)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Class</label>
+                        <select id="className" required>
+                            <option value="">තෝරන්න</option>
+                            <option value="01.Sipma - Galgamuwa">01.Sipma - Galgamuwa</option>
+                            <option value="02.Akura - Mahananneriya">02.Akura - Mahananneriya</option>
+                            <option value="03.සක්සස් College - Wannikudawewa">03.සක්සස් College - Wannikudawewa</option>
+                            <option value="04.Youtube Class">04.Youtube Class</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group"><label>School</label><input type="text" id="school" required></div>
+                <div class="input-group"><label>Profile Photo</label><input type="file" id="photo" accept="image/*" required></div>
+                <div class="input-group"><label>Password</label><input type="password" id="pass" required></div>
+                
+                <button type="submit" class="btn">Register & Get ID</button>
+                <p style="font-size:0.85rem; margin-top:20px; color:#64748b;">දැනටමත් ගිණුමක් තිබේද? <a href="#" onclick="showLogin()" style="color:var(--primary); font-weight:700; text-decoration:none;">Login</a></p>
+            </form>
+        </div>
+
+        <div id="loginFormCard" class="auth-card" style="display:none;">
+            <div class="logo-area">RRwithMaths</div>
+            <h3>ශිෂ්‍ය ඇතුළුවීම</h3>
+            <form onsubmit="processLogin(event)">
+                <div class="input-group">
+                    <label>Student ID</label>
+                    <input type="text" id="liID" placeholder="RR-XXXXX" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="liPass" required>
+                </div>
+                <button type="submit" class="btn">Login Now</button>
+                <p style="font-size:0.85rem; margin-top:20px; color:#64748b;">ගිණුමක් නැද්ද? <a href="#" onclick="showSignup()" style="color:var(--primary); font-weight:700; text-decoration:none;">ලියාපදිංචි වන්න</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboardView">
+        <nav class="dash-nav">
+            <div class="user-profile">
+                <img id="dPic" src="">
+                <div>
+                    <div id="dName" style="font-weight:800; color:var(--dark); line-height:1.2;">Name</div>
+                    <span id="dGrade" style="font-size:0.75rem; color:var(--primary); font-weight:700;">Grade</span>
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:15px;">
+                <span id="dIDHeader" style="background:#e2e8f0; padding:6px 12px; border-radius:10px; font-weight:800; font-size:0.8rem; color:#475569;">ID</span>
+                <i class="fas fa-power-off" onclick="location.reload()" style="color:#ef4444; cursor:pointer; font-size:1.3rem;"></i>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-chart-line"></i> දෛනික ප්‍රගතිය</div>
+                <div style="text-align:center;">
+                    <div class="hour-circle" id="hourDisplay">0h</div>
+                    <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 15px;">අද දින ඔබ ගණිතය වැඩ කළ පැය ගණන ඇතුළත් කරන්න.</p>
+                    <div style="display:flex; gap:8px; justify-content:center;">
+                        <input type="number" id="workInput" placeholder="පැය" style="width:70px; padding:10px; border-radius:10px; border:1px solid #ddd;">
+                        <button class="btn" onclick="updateWork()" style="width:auto; padding:10px 20px;">Update</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-bullhorn"></i> පන්ති දැනුම්දීම්</div>
+                <div class="notice-item"><strong>නව වීඩියෝව:</strong> ලබන සතියේ පාඩමට අදාළ නිබන්ධනය වෙබ් අඩවියට දමා ඇත.</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-id-card-alt"></i> ශිෂ්‍ය තොරතුරු</div>
+                <div style="font-size:0.9rem; line-height:2; color:#334155;">
+                    <p style="margin:5px 0;"><strong>ID:</strong> <span id="dID" style="color:var(--primary); font-weight:700;"></span></p>
+                    <p style="margin:5px 0;"><strong>පාසල:</strong> <span id="dSchool"></span></p>
+                    <p style="margin:5px 0;"><strong>පන්තිය:</strong> <span id="dClass"></span></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-comment-dots"></i> සර්ට පණිවිඩයක් යවන්න</div>
+                <div class="msg-box" id="chatBox"></div>
+                <div style="display:flex; gap:8px;">
+                    <input type="text" id="userMsg" style="flex:1; padding:12px; border-radius:12px; border:1px solid #ddd;" placeholder="ප්‍රශ්නය ලියන්න...">
+                    <button onclick="sendMsg()" class="btn" style="width:auto; padding:12px 15px;"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLogin() { 
+            document.getElementById('regFormCard').style.display='none'; 
+            document.getElementById('loginFormCard').style.display='block'; 
+        }
+        function showSignup() { 
+            document.getElementById('regFormCard').style.display='block'; 
+            document.getElementById('loginFormCard').style.display='none'; 
+        }
+
+        function processRegister(event) {
+            event.preventDefault();
+            const id = "RR-" + Math.floor(10000 + Math.random() * 90000);
+            const file = document.getElementById('photo').files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const userData = {
+                    id: id,
+                    name: document.getElementById('fname').value + " " + document.getElementById('lname').value,
+                    grade: document.getElementById('grade').value,
+                    class: document.getElementById('className').value,
+                    school: document.getElementById('school').value,
+                    pass: document.getElementById('pass').value,
+                    pic: e.target.result
+                };
+                localStorage.setItem(id, JSON.stringify(userData));
+                document.getElementById('generatedID').innerText = id;
+                document.getElementById('idDisplay').style.display = 'block';
+                document.getElementById('actualRegForm').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function processLogin(event) {
+            event.preventDefault();
+            const inputID = document.getElementById('liID').value.trim();
+            const inputPass = document.getElementById('liPass').value;
+            const data = localStorage.getItem(inputID);
+
+            // තහවුරු කිරීම (Security Check)
+            if(data) {
+                const user = JSON.parse(data);
+                if(user.pass === inputPass) {
+                    document.getElementById('authSection').style.display = 'none';
+                    document.querySelectorAll('.circle').forEach(c => c.style.display='none');
+                    document.body.style.background = "#f1f5f9";
+                    document.getElementById('dashboardView').style.display = 'block';
+                    
+                    document.getElementById('dName').innerText = user.name;
+                    document.getElementById('dGrade').innerText = user.grade;
+                    document.getElementById('dID').innerText = user.id;
+                    document.getElementById('dIDHeader').innerText = user.id;
+                    document.getElementById('dSchool').innerText = user.school;
+                    document.getElementById('dClass').innerText = user.class;
+                    document.getElementById('dPic').src = user.pic;
+                } else { 
+                    alert("ඇතුළත් කළ මුරපදය (Password) වැරදියි!"); 
+                }
+            } else { 
+                alert("මෙම Student ID එක පද්ධතියේ නැත. කරුණාකර නිවැරදි ID එක ඇතුළත් කරන්න හෝ ලියාපදිංචි වන්න."); 
+            }
+        }
+
+        function updateWork() {
+            const val = document.getElementById('workInput').value;
+            if(val) {
+                document.getElementById('hourDisplay').innerText = val + "h";
+                document.getElementById('hourDisplay').style.borderColor = "#22c55e";
+                alert("ප්‍රගතිය යාවත්කාලීන විය!");
+            }
+        }
+
+        function sendMsg() {
+            const msg = document.getElementById('userMsg').value;
+            const chatBox = document.getElementById('chatBox');
+            if(msg) {
+                const div = document.createElement('div');
+                div.className = 'sent-msg';
+                div.innerText = msg;
+                chatBox.appendChild(div);
+                document.getElementById('userMsg').value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
