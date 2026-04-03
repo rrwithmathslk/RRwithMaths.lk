@@ -65,10 +65,20 @@
         .stat-box i { font-size: 2.5rem; margin-bottom: 15px; display: block; }
         .stat-number { font-size: 2.5rem; font-weight: 800; color: #111; line-height: 1; }
 
-        /* 4. Timetable Section */
+        /* 4. Timetable Section & Video */
         .timetable-section { padding: 80px 10%; text-align: center; background: #fff; }
         .timetable-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
         .timetable-card img { width: 100%; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        
+        .class-video-container { width: 100%; max-width: 800px; margin: 30px auto 20px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        .class-video-container video { width: 100%; display: block; }
+
+        /* Video Caption Style */
+        .video-caption { max-width: 800px; margin: 0 auto 50px auto; padding: 20px; background-color: #f8fafc; border-radius: 15px; text-align: left; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .video-caption h4 { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .video-caption ul { list-style: none; padding: 0; margin: 0; }
+        .video-caption li { font-size: 1rem; color: #555; margin-bottom: 10px; line-height: 1.6; display: flex; align-items: start; gap: 10px; }
+        .video-caption li i { color: var(--primary-blue); margin-top: 5px; }
 
         /* 5. Lessons & Shorts */
         .lessons-section { padding: 80px 10%; background: #fdfdfd; text-align: center; }
@@ -110,6 +120,9 @@
             .about-section { flex-direction: column; text-align: center; padding: 40px 5%; }
             .main-img { width: 100%; max-width: 300px; }
             .section-title { font-size: 1.8rem; }
+            .video-caption { padding: 15px; margin-bottom: 40px; }
+            .video-caption h4 { font-size: 1.1rem; }
+            .video-caption li { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -123,6 +136,7 @@
         <div class="nav-links" id="navLinks">
             <a href="#" onclick="toggleMenu()">Home</a>
             <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#centers" onclick="toggleMenu()">Centers</a>
             <a href="#timetable" onclick="toggleMenu()">Timetable</a>
             <a href="#lessons" onclick="toggleMenu()">Lessons</a>
             <a href="#shorts" onclick="toggleMenu()">Shorts</a>
@@ -141,8 +155,6 @@
             <a href="https://www.youtube.com/channel/UCizU4mMrHqzCshwHSdwkU2A" target="_blank" class="yt-btn">
                 <i class="fab fa-youtube"></i> SUBSCRIBE ON YOUTUBE
             </a>
-
-            
             </div>
     </section>
 
@@ -167,12 +179,33 @@
         </div>
     </section>
 
-    <section class="timetable-section" id="timetable">
-        <h2 class="section-title">Class <span>Timetables</span></h2>
-        <div class="timetable-grid">
-            <div class="timetable-card"><img src="Time 01.jpeg"></div>
-            <div class="timetable-card"><img src="Time 02.jpeg"></div>
-            <div class="timetable-card"><img src="Time 03.jpeg"></div>
+    <section class="timetable-section">
+        <div id="centers">
+            <h2 class="section-title">Our Class <span>Centers</span></h2>
+            <div class="class-video-container">
+                <video controls poster="Logo02.png">
+                    <source src="Akura.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="video-caption">
+                <h4><i class="fas fa-graduation-cap"></i> අපේ පන්ති පැවැත්වෙන ස්ථානය</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> <span>මෙම විශේෂිත ගණිත පන්ති මාලාව පැවැත්වෙන්නේ <strong>මහනාන්නේරිය</strong> ප්‍රදේශයේ පිහිටි <strong>"අකුර"</strong> අධ්‍යාපන ආයතනයේදීය.</span></li>
+                    <li><i class="fas fa-book-open"></i> <span>ඔබේ දරුවා <strong>6 ශ්‍රේණියේ සිට 11 ශ්‍රේණිය</strong> දක්වා ඕනෑම වසරක ඉගෙනුම ලබන්නේ නම්, ගණිතය විෂයෙහි විශිෂ්ටයෙකු වීමට අප හා එක්විය හැක.</span></li>
+                    <li><i class="fas fa-clock"></i> <span>වැඩිදුර විස්තර සහ එක් එක් ශ්‍රේණිය සඳහා පන්ති වේලාවන් දැනගැනීම සඳහා පහත දැක්වෙන කාලසටහන පරීක්ෂා කරන්න.</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="timetable">
+            <h2 class="section-title">Class <span>Timetables</span></h2>
+            <div class="timetable-grid">
+                <div class="timetable-card"><img src="Time 01.jpeg"></div>
+                <div class="timetable-card"><img src="Time 02.jpeg"></div>
+                <div class="timetable-card"><img src="Time 03.jpeg"></div>
+            </div>
         </div>
     </section>
 
