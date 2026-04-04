@@ -3,293 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | RRwithMaths LK</title>
-    
+    <title>Student Dashboard | RRwithMaths LK</title>
+    <link rel="icon" type="image/png" href="Logo02.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #020617;
+            --main-blue: #0066ff;
+            --bg-dark: #0f172a;
             --card-bg: #1e293b;
-            --accent-blue: #3b82f6;
+            --sidebar-bg: #020617;
             --text-light: #f8fafc;
-            --text-dim: #94a3b8;
+            --footer-bg: #0c111d;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-dark); color: var(--text-light); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
 
-        /* Dashboard Header */
-        .dash-header {
-            background: #020617;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #1e293b;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .dash-header h1 { font-size: 1.3rem; font-weight: 800; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 1px; }
+        .dashboard-wrapper { display: flex; min-height: 100vh; }
 
-        .dashboard-container { display: flex; min-height: 100vh; }
-        
         /* Sidebar Desktop */
         .sidebar {
-            width: 260px;
-            background-color: #020617;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            border-right: 1px solid #1e293b;
+            width: 280px; background: var(--sidebar-bg); padding: 30px 20px;
+            border-right: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column;
         }
-
-        .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 10px; }
         .nav-item {
-            padding: 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 15px; border-radius: 12px; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; gap: 12px; color: #94a3b8;
+            text-decoration: none; font-size: 0.95rem; font-weight: 600; margin-bottom: 8px;
         }
-        .nav-item:hover, .nav-item.active { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
+        .nav-item.active, .nav-item:hover { background: rgba(0, 102, 255, 0.15); color: var(--main-blue); }
 
         /* Main Content Area */
-        .main-content { flex: 1; padding: 40px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-        .section { display: none; }
-        .section.active { display: block; animation: fadeIn 0.5s ease; }
+        .main-content { flex: 1; padding: 40px; padding-bottom: 100px; }
+        .go-back { color: var(--main-blue); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 30px; cursor: pointer; }
+        
+        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; }
+        .section-title span { color: var(--main-blue); }
+        .section-subtitle { color: #94a3b8; margin-bottom: 40px; font-weight: 500; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .header-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; }
-
-        /* Grade Cards Grid */
-        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-        .category-card {
-            background: var(--card-bg);
-            padding: 35px 20px;
-            border-radius: 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        /* Grid for Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 25px; }
+        .grade-card {
+            background: var(--card-bg); padding: 35px 20px; border-radius: 24px;
+            text-align: center; cursor: pointer; transition: 0.4s; border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        .category-card:hover { transform: translateY(-8px); border-color: var(--accent-blue); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); }
-        .category-card i { font-size: 2.2rem; margin-bottom: 12px; color: var(--accent-blue); }
-        .category-card h3 { font-size: 1rem; }
+        .grade-card:hover { transform: translateY(-8px); border-color: var(--main-blue); box-shadow: 0 15px 40px rgba(0,102,255,0.15); }
+        .grade-card i { font-size: 2.5rem; color: var(--main-blue); margin-bottom: 15px; }
+        .grade-card h3 { font-weight: 700; font-size: 1.1rem; }
 
-        /* Paper List Modal (Popup) */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center; align-items: center;
-            z-index: 2000;
-            padding: 20px;
+        /* Mobile Bottom Nav */
+        .mobile-nav {
+            display: none; position: fixed; bottom: 0; width: 100%;
+            background: var(--sidebar-bg); border-top: 1px solid rgba(255,255,255,0.1);
+            justify-content: space-around; padding: 15px 0; z-index: 1000;
         }
-        .modal-content {
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 25px;
-            width: 100%;
-            max-width: 550px;
-            border: 1px solid var(--accent-blue);
-            position: relative;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--text-dim); }
+        .mobile-nav a, .mobile-nav div { text-align: center; color: #94a3b8; font-size: 0.7rem; font-weight: 600; text-decoration: none; }
+        .mobile-nav i { display: block; font-size: 1.4rem; margin-bottom: 5px; }
+        .mobile-nav .active { color: var(--main-blue); }
 
-        .paper-list { margin-top: 20px; list-style: none; }
-        .paper-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-        .paper-item:hover { background: rgba(59, 130, 246, 0.1); }
-        .btn-dl { background: var(--accent-blue); color: white; padding: 8px 18px; border-radius: 10px; text-decoration: none; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
-
-        /* Classes & Info */
-        .info-card { background: var(--card-bg); padding: 25px; border-radius: 20px; margin-bottom: 15px; border-left: 5px solid var(--accent-blue); }
-
-        /* Mobile Bottom Navigation */
-        .mobile-nav { display: none; position: fixed; bottom: 0; width: 100%; background: #020617; justify-content: space-around; padding: 12px; border-top: 1px solid #1e293b; z-index: 1000; }
-        .mobile-nav div { text-align: center; color: var(--text-dim); font-size: 0.7rem; cursor: pointer; }
-        .mobile-nav i { font-size: 1.4rem; display: block; margin-bottom: 4px; }
-        .mobile-nav .active { color: var(--accent-blue); }
+        /* Footer */
+        .footer { background: var(--footer-bg); padding: 60px 20px 30px 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+        .footer-logo { width: 150px; margin-bottom: 20px; }
+        .footer-text { color: #94a3b8; font-size: 0.9rem; max-width: 450px; line-height: 1.7; }
+        .footer-right { text-align: right; }
+        .wa-btn { background: #25d366; color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: 700; display: inline-block; transition: 0.3s; }
 
         @media (max-width: 768px) {
             .sidebar { display: none; }
             .mobile-nav { display: flex; }
-            .main-content { padding: 20px 20px 100px 20px; }
-            .dash-header { padding: 15px 20px; }
+            .main-content { padding: 25px; padding-bottom: 120px; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-right { text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <header class="dash-header">
-        <h1>Dashboard</h1>
-        <div style="font-weight: 600; opacity: 0.8;">RRwithMaths LK</div>
-    </header>
+<div class="dashboard-wrapper">
+    <aside class="sidebar">
+        <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Main Website</a>
+        <div onclick="showTab('papers')" class="nav-item active" id="side-papers"><i class="fas fa-file-alt"></i> Question Papers</div>
+        <div onclick="showTab('classes')" class="nav-item" id="side-classes"><i class="fas fa-video"></i> My Classes</div>
+        <a href="https://wa.me/94771835828" class="nav-item"><i class="fas fa-question-circle"></i> Help Center</a>
+    </aside>
 
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <nav>
-                <ul class="nav-menu">
-                    <li onclick="showSection('papers')"><a href="#" id="link-papers" class="nav-item active"><i class="fas fa-copy"></i> Question Papers</a></li>
-                    <li onclick="showSection('classes')"><a href="#" id="link-classes" class="nav-item"><i class="fas fa-clock"></i> My Classes</a></li>
-                </ul>
-            </nav>
-            <div style="margin-top: auto; padding: 20px; background: rgba(59, 130, 246, 0.05); border-radius: 20px; text-align: center;">
-                <p style="font-size: 0.75rem; color: var(--text-dim);">Help Center</p>
-                <a href="https://wa.me/94771835828" style="color: var(--accent-blue); text-decoration: none; font-weight: 700; font-size: 0.9rem;">+94 77 183 5828</a>
+    <main class="main-content">
+        <a href="index.html" class="go-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+        <section id="papers-sec">
+            <h1 class="section-title">Lessons that tell <span>Our story</span></h1>
+            <p class="section-subtitle">තෝරාගත් ශ්‍රේණියට අදාළ ප්‍රශ්න පත්‍ර ලබාගන්න</p>
+            
+            <div class="grid">
+                <div class="grade-card" onclick="location.href='papers-page.html?grade=6'"><i class="fas fa-book"></i><h3>Grade 06</h3></div>
+                <div class="grade-card" onclick="location.href='papers-page.html?grade=7'"><i class="fas fa-book"></i><h3>Grade 07</h3></div>
+                <div class="grade-card" onclick="location.href='papers-page.html?grade=8'"><i class="fas fa-book"></i><h3>Grade 08</h3></div>
+                <div class="grade-card" onclick="location.href='papers-page.html?grade=9'"><i class="fas fa-book"></i><h3>Grade 09</h3></div>
+                <div class="grade-card" onclick="location.href='papers-page.html?grade=10'"><i class="fas fa-graduation-cap"></i><h3>Grade 10</h3></div>
+                <div class="grade-card" onclick="location.href='papers-page.html?grade=11'"><i class="fas fa-award"></i><h3>O/L Papers</h3></div>
             </div>
-        </aside>
+        </section>
 
-        <main class="main-content">
-            
-            <section id="papers" class="section active">
-                <h2 class="header-title">Question Papers</h2>
-                <div class="category-grid">
-                    <div class="category-card" onclick="loadPapers(6)">
-                        <i class="fas fa-folder"></i>
-                        <h3>Grade 06</h3>
-                    </div>
-                    <div class="category-card" onclick="loadPapers(7)">
-                        <i class="fas fa-folder"></i>
-                        <h3>Grade 07</h3>
-                    </div>
-                    <div class="category-card" onclick="loadPapers(8)">
-                        <i class="fas fa-folder"></i>
-                        <h3>Grade 08</h3>
-                    </div>
-                    <div class="category-card" onclick="loadPapers(9)">
-                        <i class="fas fa-folder"></i>
-                        <h3>Grade 09</h3>
-                    </div>
-                    <div class="category-card" onclick="loadPapers(10)">
-                        <i class="fas fa-user-graduate"></i>
-                        <h3>Grade 10</h3>
-                    </div>
-                    <div class="category-card" onclick="loadPapers(11)">
-                        <i class="fas fa-star"></i>
-                        <h3>O/L Exam Papers</h3>
-                    </div>
+        <section id="classes-sec" style="display:none;">
+            <h1 class="section-title">My <span>Classes</span></h1>
+            <div style="background: var(--card-bg); padding: 60px; border-radius: 30px; text-align: center; margin-top: 20px;">
+                <i class="fas fa-lock" style="font-size: 3rem; color: #64748b; margin-bottom: 20px;"></i>
+                <p>පන්ති සඳහා ලියාපදිංචි වී නොමැත.</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-inner">
+                <div>
+                    <img src="Logo02.png" class="footer-logo">
+                    <p class="footer-text">ගණිතය සරලව සහ පැහැදිලිව ඉගෙන ගන්න ලංකාවේ හොඳම තැන. RRwithmath.lk හරහා දරුවන්ගේ අනාගතය ජයගන්න.</p>
                 </div>
-            </section>
-
-           <section id="classes" class="section">
-            
-    <h2 class="header-title">My Classes</h2>
-    
-    <div style="text-align: center; padding: 50px 20px; background: rgba(255,255,255,0.02); border-radius: 25px; border: 1px dashed rgba(59, 130, 246, 0.3);">
-        <i class="fas fa-calendar-times" style="font-size: 3.5rem; color: #94a3b8; margin-bottom: 20px;"></i>
-        <h3 style="color: #f8fafc; margin-bottom: 10px;">No Active Classes Found</h3>
-        <p style="color: #94a3b8; font-size: 0.9rem; max-width: 400px; margin: 0 auto 25px auto;">
-            You are not currently enrolled in any live classes. Please contact the help center to join a new batch.
-        </p>
-        <a href="https://wa.me/94771835828" target="_blank" style="display: inline-block; background: #25d366; color: white; padding: 12px 25px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem;">
-            <i class="fab fa-whatsapp"></i> CONTACT ADMISSION
-        </a>
-    </div>
-
-</section>
-
-        </main>
-    </div>
-
-    <div id="paperModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle" style="color: var(--accent-blue);">Grade Papers</h2>
-            <div id="paperContainer" class="paper-list">
+                <div class="footer-right">
+                    <p style="color: white; font-weight: 800; margin-bottom: 15px;">Contact Us</p>
+                    <a href="https://wa.me/94771835828" class="wa-btn">Click to Join</a>
+                    <p style="color: #94a3b8; margin-top: 15px; font-size: 0.95rem;">Hotline: 077 183 5828</p>
                 </div>
-        </div>
-    </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: #64748b;">
+                © 2026 RRwithMaths_LK. All rights reserved. | Designed by Dulin Yensith
+            </div>
+        </footer>
+    </main>
+</div>
 
-    <nav class="mobile-nav">
-        <div onclick="showSection('papers')" id="m-link-papers" class="active"><i class="fas fa-copy"></i>Papers</div>
-        <div onclick="showSection('classes')" id="m-link-classes"><i class="fas fa-clock"></i>Classes</div>
-        <div onclick="window.location.href='https://wa.me/94771835828'"><i class="fab fa-whatsapp"></i>Help</div>
-    </nav>
+<nav class="mobile-nav">
+    <a href="index.html"><i class="fas fa-home"></i>Home</a>
+    <div onclick="showTab('papers')" class="active" id="mob-papers"><i class="fas fa-file-alt"></i>Papers</div>
+    <div onclick="showTab('classes')" id="mob-classes"><i class="fas fa-video"></i>Classes</div>
+    <div onclick="location.href='https://wa.me/94771835828'"><i class="fas fa-headset"></i>Help</div>
+</nav>
 
-    <script>
-        /* --- පේපර්ස් ඇතුළත් කරන කොටස ---
-           මෙහි ඇති 'name' යන්නට පේපර් එකේ නමද, 
-           'link' යන්නට ඔබේ GitHub එකේ ඇති PDF එකේ නමද ලබා දෙන්න.
-        */
-        const paperData = {
-            6: [
-                { name: "ගණිතය - 6 ශ්‍රේණිය: වාර පරීක්ෂණ පෙරහුරු ප්‍රශ්න පත්‍රය (2019 - NWP)", link: "G_6 01.pdf" }
-
-            ],
-            7: [
-                
-            ],
-            8: [],
-            9: [],
-            10: [
-                
-            ],
-            11: [
-               
-            ]
-        };
-
-        function showSection(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-item, .mobile-nav div').forEach(n => n.classList.remove('active'));
-            document.getElementById('link-'+id).classList.add('active');
-            document.getElementById('m-link-'+id).classList.add('active');
+<script>
+    function showTab(id) {
+        document.getElementById('papers-sec').style.display = (id === 'papers') ? 'block' : 'none';
+        document.getElementById('classes-sec').style.display = (id === 'classes') ? 'block' : 'none';
+        
+        document.querySelectorAll('.nav-item, .mobile-nav div').forEach(el => el.classList.remove('active'));
+        if(id === 'papers') { 
+            document.getElementById('side-papers').classList.add('active'); 
+            document.getElementById('mob-papers').classList.add('active'); 
+        } else { 
+            document.getElementById('side-classes').classList.add('active'); 
+            document.getElementById('mob-classes').classList.add('active'); 
         }
-
-        function loadPapers(grade) {
-            const modal = document.getElementById('paperModal');
-            const container = document.getElementById('paperContainer');
-            const title = document.getElementById('modalTitle');
-            
-            title.innerText = grade === 11 ? "O/L Exam Papers" : "Grade " + grade + " Papers";
-            container.innerHTML = "";
-
-            const papers = paperData[grade];
-
-            if (papers.length === 0) {
-                container.innerHTML = "<p style='text-align:center; color:#94a3b8; margin:20px 0;'>Papers Not Uploaded Yet.</p>";
-            } else {
-                papers.forEach(p => {
-                    container.innerHTML += `
-                        <div class="paper-item">
-                            <span style="font-size: 0.9rem;">${p.name}</span>
-                            <a href="${p.link}" download="${p.name}" class="btn-dl">
-                                <i class="fas fa-download"></i> DOWNLOAD
-                            </a>
-                        </div>
-                    `;
-                });
-            }
-            modal.style.display = "flex";
-        }
-
-        function closeModal() { document.getElementById('paperModal').style.display = "none"; }
-        window.onclick = (e) => { if(e.target.className === 'modal') closeModal(); }
-    </script>
-
+    }
+</script>
 </body>
 </html>
