@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papers | RRwithMaths LK</title>
+    <link rel="icon" type="image/png" href="Logo02.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #0f172a; color: white; margin: 0; }
+        .container { max-width: 1000px; margin: 50px auto; padding: 20px; min-height: 80vh; }
+        
+        .back-btn { color: #0066ff; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 40px; }
+        .title { font-size: 2.5rem; font-weight: 800; margin-bottom: 40px; }
+        .title span { color: #0066ff; }
+
+        .paper-card { 
+            background: #1e293b; padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; transition: 0.3s;
+        }
+        .paper-card:hover { transform: scale(1.01); border-color: #0066ff; }
+        
+        .paper-name { font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; gap: 15px; }
+        .paper-name i { color: #ff3e3e; font-size: 1.5rem; }
+
+        .btn-group { display: flex; gap: 12px; }
+        .btn { padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem; transition: 0.3s; }
+        .btn-view { background: #0066ff; color: white; }
+        .btn-down { background: #00c853; color: white; }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        .footer { background: #0c111d; padding: 40px; text-align: center; border-top: 1px solid #1e293b; color: #64748b; font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            .paper-card { flex-direction: column; gap: 20px; text-align: center; }
+            .btn-group { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    <h1 class="title" id="page-title">Grade Papers that tell <span>Our story</span></h1>
+    <div id="papers-list"></div>
+</div>
+
+<footer class="footer">
+    <img src="Logo02.png" style="width: 130px; margin-bottom: 15px;"><br>
+    © 2026 RRwithMaths_LK. All rights reserved. | Designed by Dulin Yensith
+</footer>
+
+<script>
+    const paperData = {
+        6: [{ name: "ගණිතය - 6 ශ්‍රේණිය: වාර පරීක්ෂණ පෙරහුරු පත්‍රය (2019 - NWP)", file: "G_6 01.pdf" }],
+        7: [], 8: [], 9: [], 10: [], 11: []
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const grade = urlParams.get('grade');
+    const list = document.getElementById('papers-list');
+
+    if (grade) {
+        document.getElementById('page-title').innerHTML = `Grade ${grade} Papers that tell <span>Our story</span>`;
+        const papers = paperData[grade] || [];
+        if(papers.length === 0) {
+            list.innerHTML = "<p style='color:#64748b;'>ප්‍රශ්න පත්‍ර ඇතුළත් කර නොමැත.</p>";
+        } else {
+            papers.forEach(p => {
+                list.innerHTML += `
+                    <div class="paper-card">
+                        <div class="paper-name"><i class="fas fa-file-pdf"></i> ${p.name}</div>
+                        <div class="btn-group">
+                            <a href="${p.file}" target="_blank" class="btn btn-view">VIEW</a>
+                            <a href="${p.file}" download class="btn btn-down">DOWNLOAD</a>
+                        </div>
+                    </div>`;
+            });
+        }
+    }
+</script>
+</body>
+</html>
