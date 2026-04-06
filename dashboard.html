@@ -53,6 +53,9 @@
         .grade-card i { font-size: 2.5rem; color: var(--main-blue); margin-bottom: 15px; }
         .grade-card h3 { font-weight: 700; font-size: 1.1rem; }
 
+        /* Audio Player Styling */
+        audio { width: 100%; margin-top: 15px; height: 35px; border-radius: 10px; }
+
         /* Mobile Bottom Nav */
         .mobile-nav {
             display: none; position: fixed; bottom: 0; width: 100%;
@@ -87,6 +90,7 @@
         <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Main Website</a>
         <div onclick="showTab('papers')" class="nav-item active" id="side-papers"><i class="fas fa-file-alt"></i> Question Papers</div>
         <div onclick="showTab('classes')" class="nav-item" id="side-classes"><i class="fas fa-video"></i> My Classes</div>
+        <div onclick="showTab('music')" class="nav-item" id="side-music"><i class="fas fa-music"></i> My Music</div>
         <a href="https://wa.me/94771835828" class="nav-item"><i class="fas fa-question-circle"></i> Help Center</a>
     </aside>
 
@@ -115,6 +119,39 @@
             </div>
         </section>
 
+        <section id="music-sec" style="display:none;">
+            <h1 class="section-title">My <span>Music</span></h1>
+            <p class="section-subtitle">පාඩම් කරන අතරතුර සන්සුන් සංගීතයට සවන් දෙන්න</p>
+            <div class="grid">
+                <div class="grade-card">
+                    <i class="fas fa-headphones"></i>
+                    <h3>Turning_the_impossible</h3>
+                    <audio controls>
+                        <source src="song1.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="grade-card">
+                    <i class="fas fa-headphones"></i>
+                    <h3>RRwithMaths LK_1</h3>
+                    <audio controls>
+                        <source src="song2.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                </div>
+                <div class="grade-card">
+                    <i class="fas fa-headphones"></i>
+                    <h3>RRwithMaths LK_2</h3>
+                    <audio controls>
+                        <source src="song3.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
+            </div>
+        </section>
+
         <footer class="footer">
             <div class="footer-inner">
                 <div>
@@ -138,22 +175,25 @@
     <a href="index.html"><i class="fas fa-home"></i>Home</a>
     <div onclick="showTab('papers')" class="active" id="mob-papers"><i class="fas fa-file-alt"></i>Papers</div>
     <div onclick="showTab('classes')" id="mob-classes"><i class="fas fa-video"></i>Classes</div>
+    <div onclick="showTab('music')" id="mob-music"><i class="fas fa-music"></i>Music</div>
     <div onclick="location.href='https://wa.me/94771835828'"><i class="fas fa-headset"></i>Help</div>
 </nav>
 
 <script>
     function showTab(id) {
-        document.getElementById('papers-sec').style.display = (id === 'papers') ? 'block' : 'none';
-        document.getElementById('classes-sec').style.display = (id === 'classes') ? 'block' : 'none';
+        // Hide all sections
+        document.getElementById('papers-sec').style.display = 'none';
+        document.getElementById('classes-sec').style.display = 'none';
+        document.getElementById('music-sec').style.display = 'none';
         
+        // Show selected section
+        document.getElementById(id + '-sec').style.display = 'block';
+        
+        // Update active classes
         document.querySelectorAll('.nav-item, .mobile-nav div').forEach(el => el.classList.remove('active'));
-        if(id === 'papers') { 
-            document.getElementById('side-papers').classList.add('active'); 
-            document.getElementById('mob-papers').classList.add('active'); 
-        } else { 
-            document.getElementById('side-classes').classList.add('active'); 
-            document.getElementById('mob-classes').classList.add('active'); 
-        }
+        
+        document.getElementById('side-' + id).classList.add('active');
+        document.getElementById('mob-' + id).classList.add('active');
     }
 </script>
 </body>
