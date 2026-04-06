@@ -157,14 +157,14 @@
         /* Floating WhatsApp */
         .floating-wa { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; }
 
-        /* --- UPDATED SCROLLABLE COLOR SWITCHER WITH RGB EFFECT --- */
+        /* --- COLOR SWITCHER POSITIONED CLOSER TO WHATSAPP --- */
         .color-switcher-wrapper {
             position: fixed;
-            top: 20%;
-            right: 20px;
+            bottom: 95px; /* Closely above WhatsApp button */
+            right: 32px;
             z-index: 2100;
             display: flex;
-            flex-direction: column;
+            flex-direction: column-reverse;
             align-items: center;
         }
 
@@ -182,13 +182,13 @@
             z-index: 2;
             transition: 0.3s;
             font-size: 1.2rem;
-            margin-bottom: 15px; /* ඉඩ කඩ වැඩි කළා */
+            margin-top: 5px;
         }
 
         .color-scroll-box {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
-            width: 60px; /* තරමක් පළල් කළා */
+            width: 60px;
             height: 0;
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
@@ -200,20 +200,16 @@
             transition: height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s;
             padding: 0;
             scrollbar-width: none;
-            position: relative;
         }
 
-        /* RGB Border Effect for Active Box */
         .color-scroll-box.active {
-            height: 350px; /* උස වැඩි කළා */
+            height: 320px;
             padding: 20px 0;
-            /* Animated RGB Border */
             border: 2px solid transparent;
             background-clip: padding-box;
-            animation: rgbBorder 3s infinite linear, slideDownMenu 0.4s ease;
+            animation: rgbBorder 3s infinite linear;
         }
 
-        /* RGB Border Keyframes */
         @keyframes rgbBorder {
             0% { border-color: #ff0000; box-shadow: 0 10px 30px rgba(255,0,0,0.2); }
             20% { border-color: #ff00ff; box-shadow: 0 10px 30px rgba(255,0,255,0.2); }
@@ -223,15 +219,10 @@
             100% { border-color: #ff0000; box-shadow: 0 10px 30px rgba(255,0,0,0.2); }
         }
 
-        @keyframes slideDownMenu {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .color-scroll-box::-webkit-scrollbar { display: none; }
 
         .color-item {
-            font-size: 32px; /* තරමක් විශාල කළා */
+            font-size: 32px;
             cursor: pointer;
             transition: 0.2s;
             flex-shrink: 0;
@@ -239,7 +230,6 @@
         }
         .color-item:hover { transform: scale(1.3); }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             nav { padding: 15px 5%; }
             .menu-toggle { display: block; } 
@@ -252,7 +242,7 @@
             .section-title { font-size: 1.8rem; }
             .timetable-grid, .video-grid { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 20px; }
             .timetable-card, .video-card { flex: 0 0 85%; }
-            .color-switcher-wrapper { top: 15%; right: 10px; }
+            .color-switcher-wrapper { bottom: 95px; right: 32px; }
         }
     </style>
 </head>
@@ -270,8 +260,12 @@
             <div class="color-item" style="color: #8b5cf6;" onclick="applyTheme('#8b5cf6')"><i class="fas fa-tint"></i></div>
             <div class="color-item" style="color: #f59e0b;" onclick="applyTheme('#f59e0b')"><i class="fas fa-tint"></i></div>
             <div class="color-item" style="color: #ec4899;" onclick="applyTheme('#ec4899')"><i class="fas fa-tint"></i></div>
-            
-            <div class="color-item" style="color: #ff0000; text-shadow: 0 0 5px #ff0000;" onclick="applyTheme('#ff0000')"><i class="fas fa-magic"></i></div> <div class="color-item" style="color: #00ff00; text-shadow: 0 0 5px #00ff00;" onclick="applyTheme('#00ff00')"><i class="fas fa-magic"></i></div> <div class="color-item" style="color: #0000ff; text-shadow: 0 0 5px #0000ff;" onclick="applyTheme('#0000ff')"><i class="fas fa-magic"></i></div> <div class="color-item" style="color: #ff00ff; text-shadow: 0 0 5px #ff00ff;" onclick="applyTheme('#ff00ff')"><i class="fas fa-magic"></i></div> <div class="color-item" style="color: #00ffff; text-shadow: 0 0 5px #00ffff;" onclick="applyTheme('#00ffff')"><i class="fas fa-magic"></i></div> </div>
+            <div class="color-item" style="color: #ff0000; text-shadow: 0 0 5px #ff0000;" onclick="applyTheme('#ff0000')"><i class="fas fa-magic"></i></div>
+            <div class="color-item" style="color: #00ff00; text-shadow: 0 0 5px #00ff00;" onclick="applyTheme('#00ff00')"><i class="fas fa-magic"></i></div>
+            <div class="color-item" style="color: #0000ff; text-shadow: 0 0 5px #0000ff;" onclick="applyTheme('#0000ff')"><i class="fas fa-magic"></i></div>
+            <div class="color-item" style="color: #ff00ff; text-shadow: 0 0 5px #ff00ff;" onclick="applyTheme('#ff00ff')"><i class="fas fa-magic"></i></div>
+            <div class="color-item" style="color: #00ffff; text-shadow: 0 0 5px #00ffff;" onclick="applyTheme('#00ffff')"><i class="fas fa-magic"></i></div>
+        </div>
     </div>
 
     <nav>
@@ -406,15 +400,12 @@
             navLinks.classList.toggle('active');
         }
 
-        // Color Switcher Scroll Logic
         function toggleColorMenu() {
             document.getElementById('colorScrollBox').classList.toggle('active');
         }
 
         function applyTheme(color) {
             document.documentElement.style.setProperty('--primary-blue', color);
-            // මෙනුව වසා දැමීමට අවශ්‍ය නම් පහත පේළිය භාවිතා කරන්න
-            // toggleColorMenu();
         }
 
         const API_KEY = 'AIzaSyBRAhd0SQhpKXH0XrGwwte0MN3ordTZF-I'; 
